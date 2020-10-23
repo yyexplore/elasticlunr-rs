@@ -43,8 +43,8 @@ extern crate rust_stemmers;
 #[cfg(test)]
 #[macro_use]
 extern crate maplit;
-#[cfg(feature = "zh")]
-extern crate jieba_rs;
+//#[cfg(feature = "zh")]
+//extern crate jieba_rs;
 #[cfg(feature = "ja")]
 extern crate lindera;
 

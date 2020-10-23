@@ -1,8 +1,8 @@
 //! Defines the pipeline which processes text for inclusion in the index. Most users do not need
 //! to use this module directly.
 
-#[cfg(feature = "zh")]
-use jieba_rs::Jieba;
+//#[cfg(feature = "zh")]
+//use jieba_rs::Jieba;
 #[cfg(feature = "ja")]
 use lindera::tokenizer::Tokenizer;
 use serde::ser::{Serialize, SerializeSeq, Serializer};
@@ -17,13 +17,17 @@ pub fn tokenize(text: &str) -> Vec<String> {
 
 #[cfg(feature = "zh")]
 pub fn tokenize_chinese(text: &str) -> Vec<String> {
-    let jieba = Jieba::new();
-
-    jieba
-        .cut_for_search(text.as_ref(), false)
-        .iter()
-        .map(|s| (*s).into())
-        .collect()
+    let tokens_en: Vec<String> = text.split(|c: char| c.is_whitespace() || c == '-')
+        .filter(|s| !s.is_empty())
+        .map(|s| s.trim().to_lowercase())
+        .collect();
+    
+    let tokens_zh: Vec<String> = text.replace(|c: char| c.is_ascii(), "")
+        .split("")
+        .filter(|s| !s.is_empty())
+        .map(|s| s.trim().to_lowercase())
+        .collect();
+    return [&tokens_en[..], &tokens_zh[..]].concat()
 }
 
 #[cfg(feature = "ja")]

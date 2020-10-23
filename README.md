@@ -1,4 +1,5 @@
-# elasticlunr-rs 
+# fork from elasticlunr-rs removing jieba lib
+# elasticlunr-rs  
 
 ![Build Status](https://github.com/mattico/elasticlunr-rs/workflows/CI/badge.svg)
 [![Documentation](https://docs.rs/elasticlunr-rs/badge.svg)](https://docs.rs/elasticlunr-rs)
